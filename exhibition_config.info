@@ -1,0 +1,4 @@
+name = Smithsonian Exhibition Configuration
+description = Allows users of the item viewer to configure their exhibition sites - this does not display the exhibition sites themselves
+package = Smithsonian
+core = 6.x

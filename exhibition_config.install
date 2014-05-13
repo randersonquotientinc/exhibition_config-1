@@ -1,0 +1,177 @@
+<?php
+function dashboard_charts_install() {
+  drupal_set_message("Exhibition Config Install starting");
+  drupal_install_schema('exhibition_config');
+}
+function exhibition_config_update_6001() {
+  drupal_set_message("Exhibition Config Update to 6001 starting");
+  return drupal_install_schema('exhibition_config');
+}
+function exhibition_config_update_6002(){
+  drupal_set_message("Exhibition Config Update to 6002 starting");
+  $ret = array();
+  db_add_field($ret, 'exhibition_config','is_available',
+    array(
+      'type' => 'int',
+    )
+  );
+  db_add_field($ret, 'exhibition_config','use_parent_config',
+    array(
+      'type' => 'int',
+    )
+  );
+  return $ret;
+}
+function exhibition_config_update_6003(){
+  //Add the role for those that can edit the exhibition configs without being owners
+  //From comment in: https://drupal.org/node/283261
+  // Create query parameters
+  $params = _exhibition_config_get_roles_by_name ();
+  array_unshift ($params, 'INSERT INTO {role} (name) VALUES (\'%s\')' . str_repeat (', (\'%s\')', count ($params) - 1));
+  // add roles to system
+  call_user_func_array ('db_query', $params);
+  return array();
+
+}
+function exhibition_config_update_6004(){
+  drupal_set_message("Exhibition Config Update to 6004 starting");
+  $ret = array();
+  db_add_field($ret, 'exhibition_config','nav_type',
+    array(
+        'type' => 'text',
+        'size' => 'normal',
+    )
+  );
+  return $ret;
+}
+function exhibition_config_update_6005(){
+  drupal_set_message("Exhibition Config Update to 6005 starting");
+  $ret = array();
+  db_add_field($ret, 'exhibition_config','custom_url',
+    array(
+        'type' => 'text',
+        'size' => 'normal',
+    )
+  );
+  return $ret;
+}
+function exhibition_config_update_6006(){
+  drupal_set_message("Exhibition Config Update to 6006 starting");
+  $ret = array();
+  db_add_field($ret, 'exhibition_config','logo_height',
+    array(
+        'type' => 'text',
+        'size' => 'normal',
+    )
+  );
+  db_add_field($ret, 'exhibition_config','logo_width',
+    array(
+        'type' => 'text',
+        'size' => 'normal',
+    )
+  );
+  return $ret;
+}
+function exhibition_config_update_6007(){
+  drupal_set_message("Exhibition Config Update to 6007 starting");
+  $ret = array();
+  db_add_field($ret, 'exhibition_config','link_bar_links',
+    array(
+        'type' => 'text',
+        'size' => 'normal',
+    )
+  );
+  return $ret;
+}
+function exhibition_config_schema(){
+  $schema['exhibition_config'] = array(
+    'description' => t('Stores information for exhibitions'),
+    'fields' => array(
+      'pid' => array(
+        'type' => 'varchar',
+        'length' => '256',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'logo' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'title' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'header_html' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'css_script' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'footer_html' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'precontent_html' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'postcontent_html' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'sidebar_left_html' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'sidebar_right_html' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+      'nav_location' => array(
+        'type' => 'text',
+        'size' => 'normal',
+      ),
+    ),
+  );
+  drupal_set_message("Exhibition Config Schema complete");
+  return $schema;
+}
+/*
+* Implementation of hook_uninstall().
+*/
+function exhibition_config_uninstall() {
+  // Create query parameters
+  $params = _exhibition_config_get_roles_by_id ();
+  $numRoles = count ($params) - 1;
+  array_unshift ($params, true);
+  $querySet = array (
+    'DELETE FROM {role} WHERE rid = %d' . str_repeat (' || rid = %d', $numRoles),
+    'DELETE FROM {permission} WHERE rid = %d' . str_repeat (' || rid = %d', $numRoles),
+    'DELETE FROM {users_roles} WHERE rid = %d' . str_repeat (' || rid = %d', $numRoles),
+  );
+  // Perform queries to remove role data
+  while ($query = array_shift ($querySet)) {
+    $params [0] = $query;
+    call_user_func_array ('db_query', $params);
+  }
+}
+function _exhibition_config_get_roles_by_name() {
+  // Return role information
+  return array (
+    'Exhibition Configuration Administrator',
+  );
+}
+function _exhibition_config_get_roles_by_id () {
+    // Create query parameters
+    $params = _exhibition_config_get_roles_by_name ();
+    array_unshift ($params, 'SELECT rid FROM {role} WHERE name = \'%s\'' . str_repeat (' || name = \'%s\'', count ($params) - 1));
+    // retrieve roles from system
+    $result = call_user_func_array ('db_query', $params);
+    $role = array ();
+    while ($row = db_fetch_array ($result)) {
+      $role[] = $row ['rid'];
+    }
+    return $role;
+}
