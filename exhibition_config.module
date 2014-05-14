@@ -286,7 +286,7 @@ function exhibition_config_form_submit($form, &$form_state) {
     /*
     if ($form['use_current_config_for_children']['#value']){
       $full_pid_list = array();
-      $object = get_pid_tree($pid,'', &$full_pid_list);
+      $object = get_pid_tree_ec($pid,'', &$full_pid_list);
       foreach($full_pid_list as $curr_pid){
         $row = exhibition_config_get_config_data($curr_pid);
         if (empty($row) || is_null($row['pid'])){
@@ -335,7 +335,7 @@ array( 'pid' -> $pid
                  )
             
 */
-function get_pid_tree($pid, $owner_id, $pid_list = array()){
+function get_pid_tree_ec($pid, $owner_id, $pid_list = array()){
   require_once ( dirname(__FILE__) . '/exhibition_config.util.inc');
   $to_return = array();
   $to_return['pid'] = $pid;
@@ -358,7 +358,7 @@ function get_pid_tree($pid, $owner_id, $pid_list = array()){
       foreach($children as $child){
         //Build the tree from all the children
         //for each child, get their sub-tree
-        $to_return['children'][] = get_pid_tree($child['pid'],$owner_id,&$pid_list); 
+        $to_return['children'][] = get_pid_tree_ec($child['pid'],$owner_id,&$pid_list); 
       }
       return $to_return;
     }else{
