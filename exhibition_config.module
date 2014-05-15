@@ -631,14 +631,21 @@ function setScheme(schemeName){
 <table class="resources-table sticky-enabled sticky-table">
  <thead class="tableHeader-processed"><tr><th></th><th sort="asc">Title</th><th>Options</th> </tr></thead>
 <tbody>
- <tr class="odd"><td><a href="/exhibition/fedora/repository/si%3A257965/IMAGE" rel="shadowbox[si:257965]" title="Sample Image 1"><img class="resource-tn" src="/exhibition/fedora/repository/si%3A257965/TN"></a></td><td><span class="table-label">Sample Image 1<span></span></span></td><td><div class="exhibition_js_dropdown" style="display:none;">
-</div><div class="regular-options"><a href="/exhibition/fedora/repository/si%3A257965/IMAGE">Download</a> <a href="#" rel="shadowbox" title="Sample Image 1" onclick="return false;">View&nbsp;Metadata</a> <a href="#" rel="shadowbox[si:257965]" title="Sample Image 1" onclick="return false;">Preview</a></div>
+ <tr class="odd"><td><a href="#" rel="shadowbox[si:257965]" title="Sample Image 1"><img class="resource-tn" src="'.
+$GLOBALS['base_url'].'/'.drupal_get_path('module','exhibition_config').'/images/sample1.jpg'.
+'"></a></td><td><span class="table-label">Sample Image 1<span></span></span></td><td><div class="exhibition_js_dropdown" style="display:none;">
+</div><div class="regular-options"><a href="#">Download</a> <a href="#" rel="shadowbox" title="Sample Image 1" onclick="return false;">View&nbsp;Metadata</a> <a href="#" rel="shadowbox[si:257965]" title="Sample Image 1" onclick="return false;">Preview</a></div>
 </td> </tr>
- <tr class="even"><td><a href="/exhibition/fedora/repository/si%3A257964/IMAGE" rel="shadowbox[si:257964]" title="Sample Image 2"><img class="resource-tn" src="/exhibition/fedora/repository/si%3A257964/TN"></a></td><td><span class="table-label">Sample Image 2<span></span></span></td><td><div class="exhibition_js_dropdown" style="display:none;">
-</div><div class="regular-options"><a href="/exhibition/fedora/repository/si%3A257964/IMAGE">Download</a> <a href="#" rel="shadowbox" title="Sample Image 2" onclick="return false;">View&nbsp;Metadata</a> <a href="#" rel="shadowbox[si:257964]" title="Sample Image 2" onclick="return false;">Preview</a></div>
+ <tr class="even"><td><a href="#" rel="shadowbox[si:257964]" title="Sample Image 2">
+<img class="resource-tn" src="'.
+$GLOBALS['base_url'].'/'.drupal_get_path('module','exhibition_config').'/images/sample2.jpg'.
+'"></a></td><td><span class="table-label">Sample Image 2<span></span></span></td><td><div class="exhibition_js_dropdown" style="display:none;">
+</div><div class="regular-options"><a href="#">Download</a> <a href="#" rel="shadowbox" title="Sample Image 2" onclick="return false;">View&nbsp;Metadata</a> <a href="#" rel="shadowbox[si:257964]" title="Sample Image 2" onclick="return false;">Preview</a></div>
 </td> </tr>
- <tr class="odd"><td><a href="/exhibition/fedora/repository/si%3A257963/IMAGE" rel="shadowbox[si:257963]" title="Sample Image 3"><img class="resource-tn" src="/exhibition/fedora/repository/si%3A257963/TN"></a></td><td><span class="table-label">Sample Image 3<span></span></span></td><td><div class="exhibition_js_dropdown" style="display:none;">
-</div><div class="regular-options"><a href="/exhibition/fedora/repository/si%3A257963/IMAGE">Download</a> <a href="#" rel="shadowbox" title="Sample Image 3" onclick="return false;">View&nbsp;Metadata</a> <a href="#" rel="shadowbox[si:257963]" title="Sample Image 3" onclick="return false;">Preview</a></div>
+ <tr class="odd"><td><a href="#" rel="shadowbox[si:257963]" title="Sample Image 3"><img class="resource-tn" src="'.
+$GLOBALS['base_url'].'/'.drupal_get_path('module','exhibition_config').'/images/sample1.jpg'.
+'"></a></td><td><span class="table-label">Sample Image 3<span></span></span></td><td><div class="exhibition_js_dropdown" style="display:none;">
+</div><div class="regular-options"><a href="#">Download</a> <a href="#" rel="shadowbox" title="Sample Image 3" onclick="return false;">View&nbsp;Metadata</a> <a href="#" rel="shadowbox[si:257963]" title="Sample Image 3" onclick="return false;">Preview</a></div>
 </td> </tr>
 </tbody>
 </table>
