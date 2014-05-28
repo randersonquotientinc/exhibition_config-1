@@ -1,7 +1,8 @@
 <?php
-function dashboard_charts_install() {
+function exhibition_config_install() {
   drupal_set_message("Exhibition Config Install starting");
   drupal_install_schema('exhibition_config');
+  exhibition_config_update_6008();
 }
 function exhibition_config_update_6001() {
   drupal_set_message("Exhibition Config Update to 6001 starting");
@@ -83,6 +84,26 @@ function exhibition_config_update_6007(){
   );
   return $ret;
 }
+function exhibition_config_update_6008(){
+  exhibition_config_update_6001();
+  exhibition_config_update_6002();
+  exhibition_config_update_6003();
+  exhibition_config_update_6004();
+  exhibition_config_update_6005();
+  exhibition_config_update_6006();
+  exhibition_config_update_6007();
+}
+function exhibition_config_update_6010(){
+  exhibition_config_update_6008();
+  $ret = array();
+  return $ret;
+}
+function exhibition_config_update_6011(){
+  exhibition_config_update_6008();
+  $ret = array();
+  return $ret;
+}
+
 function exhibition_config_schema(){
   $schema['exhibition_config'] = array(
     'description' => t('Stores information for exhibitions'),
