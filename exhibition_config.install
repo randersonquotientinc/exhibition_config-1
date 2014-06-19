@@ -163,6 +163,7 @@ function exhibition_config_schema(){
 * Implementation of hook_uninstall().
 */
 function exhibition_config_uninstall() {
+  drupal_uninstall_schema('exhibition_config');
   // Create query parameters
   $params = _exhibition_config_get_roles_by_id ();
   $numRoles = count ($params) - 1;
